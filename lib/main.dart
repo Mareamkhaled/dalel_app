@@ -1,10 +1,16 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'core/utils/app_colors.dart';
 import 'core/utils/app_router.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(
+  DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => const MyApp(), // Wrap your app
+  ),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,9 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-       debugShowCheckedModeBanner: false,
-       routerConfig: router
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.offWhite),
+      debugShowCheckedModeBanner: false,
+      routerConfig: router,
     );
   }
 }
-
